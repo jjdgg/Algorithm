@@ -49,7 +49,6 @@
 
 이 문제는 **백트래킹** 혹은 `itertools.permutations`를 이용해 해결할 수 있습니다.
 
-- 직접 구현 시에는 `visited` 배열과 `path`를 활용하여 중복 없이 순열을 생성하는 **DFS 방식의 백트래킹**을 사용합니다.
 - `itertools.permutations`를 활용하면 간결하게 모든 순열을 생성할 수 있습니다.
 
 ---
@@ -59,8 +58,11 @@
 ```python
 from itertools import permutations
 
-n = int(input())
-for p in permutations(range(1, n+1)):
+N = int(input())
+arr = [i for i in range(1, N+1)]
+
+perm = permutations(arr)
+for p in perm:
     print(*p)
 ```
 ## ✅ 파이썬 코드 예시 2: 백트래킹 직접 구현
@@ -81,7 +83,7 @@ def dfs():
             path.pop()
             visited[i] = False
 
-dfs()```
+dfs()
 ```
 ## 📌 관련 개념
 브루트포스 탐색 (완전 탐색)
