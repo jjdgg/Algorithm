@@ -61,9 +61,11 @@ from itertools import permutations
 
 n = int(input())
 for p in permutations(range(1, n+1)):
-    print(*p)```
-✅ 파이썬 코드 예시 2: 백트래킹 직접 구현
-```n = int(input())
+    print(*p)
+```
+## ✅ 파이썬 코드 예시 2: 백트래킹 직접 구현
+```python
+n = int(input())
 visited = [False] * (n + 1)
 path = []
 
@@ -80,7 +82,8 @@ def dfs():
             visited[i] = False
 
 dfs()```
-📌 관련 개념
+```
+## 📌 관련 개념
 브루트포스 탐색 (완전 탐색)
 
 백트래킹 (가지치기를 통한 효율적 탐색)
