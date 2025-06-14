@@ -61,12 +61,9 @@ from itertools import permutations
 
 n = int(input())
 for p in permutations(range(1, n+1)):
-    print(*p)
+    print(*p)```
 ✅ 파이썬 코드 예시 2: 백트래킹 직접 구현
-python
-복사
-편집
-n = int(input())
+```n = int(input())
 visited = [False] * (n + 1)
 path = []
 
@@ -82,7 +79,7 @@ def dfs():
             path.pop()
             visited[i] = False
 
-dfs()
+dfs()```
 📌 관련 개념
 브루트포스 탐색 (완전 탐색)
 
@@ -90,10 +87,3 @@ dfs()
 
 순열 생성
 
-yaml
-복사
-편집
-
----
-
-필요하다면 README에 다른 문제들도 이 형식으로 쌓아갈 수 있게 템플릿을 만들어드릴게요.
