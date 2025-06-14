@@ -1,81 +1,73 @@
-# [level 1] 가장 가까운 같은 글자 - 142086 
+[Silver 3] 모든 순열 - 10974
+문제 링크
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/142086) 
+성능 요약
+메모리: 31256 KB, 시간: 72 ms
 
-### 성능 요약
+구분
+백트래킹 > 순열
 
-메모리: 11.1 MB, 시간: 4106.51 ms
-
-### 구분
-
-코딩테스트 연습 > 연습문제
-
-### 채점결과
-
+채점결과
 정확성: 100.0<br/>합계: 100.0 / 100.0
 
-### 제출 일자
+제출 일자
+2025년 06월 14일
 
-2024년 07월 29일 15:03:35
+문제 설명
+1부터 N까지의 수로 이루어진 순열을 사전 순으로 출력하는 프로그램을 작성하시오.
 
-### 문제 설명
+예를 들어, N=3일 때 가능한 모든 순열은 다음과 같다:
 
-<p>문자열 <code>s</code>가&nbsp;주어졌을 때, <code>s</code>의 각 위치마다 자신보다 앞에 나왔으면서, 자신과 가장 가까운 곳에 있는 같은 글자가 어디 있는지 알고 싶습니다.<br>
-예를 들어, <code>s</code>="banana"라고 할 때,&nbsp; 각 글자들을 왼쪽부터 오른쪽으로 읽어 나가면서&nbsp;다음과 같이 진행할 수 있습니다.</p>
+복사
+편집
+1 2 3  
+1 3 2  
+2 1 3  
+2 3 1  
+3 1 2  
+3 2 1
+이와 같이, 중복 없이, 사전 순으로 정렬된 모든 순열을 출력해야 한다.
 
-<ul>
-<li>b는 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
-<li>a는 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
-<li>n은 처음 나왔기 때문에 자신의 앞에 같은 글자가 없습니다. 이는 -1로 표현합니다.</li>
-<li>a는 자신보다 두 칸 앞에 a가 있습니다. 이는 2로 표현합니다.</li>
-<li>n도&nbsp;자신보다 두 칸 앞에 n이 있습니다. 이는 2로 표현합니다.</li>
-<li>a는 자신보다 두 칸, 네 칸 앞에 a가 있습니다. 이 중 가까운 것은 두 칸 앞이고, 이는 2로 표현합니다.</li>
-</ul>
+입력
+첫째 줄에 정수 N이 주어진다. (1 ≤ N ≤ 8)
 
-<p>따라서 최종 결과물은 [-1, -1, -1, 2, 2, 2]가 됩니다.</p>
+출력
+N!개의 줄에 걸쳐, 각 줄에 1부터 N까지의 순열 하나를 출력한다.
 
-<p>문자열 <code>s</code>이 주어질 때, 위와 같이 정의된 연산을 수행하는 함수 solution을 완성해주세요.</p>
+입출력 예
+입력	출력
+3	1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1
 
-<hr>
+해결 방법
+이 문제는 백트래킹 또는 itertools.permutations를 이용해서 풀 수 있다.
+직접 구현할 경우 used 배열을 사용하여 중복 없이 순열을 생성하면 된다.
 
-<h5>제한사항</h5>
+파이썬 코드 예시 1: itertools 사용
+from itertools import permutations
 
-<ul>
-<li>1 ≤ <code>s</code>의 길이 ≤ 10,000
+n = int(input())
+for p in permutations(range(1, n+1)):
+    print(*p)
+파이썬 코드 예시 2: 백트래킹 직접 구현
+n = int(input())
+visited = [False] * (n + 1)
+path = []
 
-<ul>
-<li><code>s</code>은 영어 소문자로만 이루어져 있습니다.</li>
-</ul></li>
-</ul>
+def dfs():
+    if len(path) == n:
+        print(*path)
+        return
+    for i in range(1, n + 1):
+        if not visited[i]:
+            visited[i] = True
+            path.append(i)
+            dfs()
+            path.pop()
+            visited[i] = False
 
-<hr>
-
-<h5>입출력 예</h5>
-<table class="table">
-        <thead><tr>
-<th>s</th>
-<th>result</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>"banana"</td>
-<td>[-1, -1, -1, 2, 2, 2]</td>
-</tr>
-<tr>
-<td>"foobar"</td>
-<td>[-1, -1, 1, -1, -1, -1]</td>
-</tr>
-</tbody>
-      </table>
-<hr>
-
-<h5>입출력 예 설명</h5>
-
-<p>입출력 예 #1<br>
-지문과 같습니다.</p>
-
-<p>입출력 예 #2<br>
-설명 생략</p>
-
-
-> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+dfs()
