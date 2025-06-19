@@ -69,13 +69,14 @@ n = int(input())
 times = list(map(int, input().split()))
 times.sort()
 
-total = 0
-acc = 0
-for t in times:
-    acc += t
-    total += acc
+accu_time = 0
+total_time = 0
 
-print(total)
+for t in times:
+    accu_time += t
+    total_time += accu_time
+
+print(total_time)
 ```
 
 ---
